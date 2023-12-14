@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+{% block single %}
+<table class="table table-sm mx-3" style="width:65%">
+    <tbody>
+    {% for item in data %}
+        <tr>
+            <td><b>{{ item.question }}</b></td>
+        </tr>
+        <tr>
+            <td>{{ item.answer|linebreaksbr }}</td>
+        </tr>
+        <tr>
+            <td>------</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "base_generic.html" %}
+
+{% block title %}<title>Філії</title>{% endblock %}
+
+{% block connect %}
+    <div class="col-sm-10">
+      <form method="post">
+        {% csrf_token %}
+        <button type="submit" name="button" class="btn btn-primary" value="ovpn">Connect to {{ url_name }}</button>
+      </form>
+        <div class="my-top">
+            <form class="form-inline" method="post">
+                {% csrf_token %}
+      <div class="form-group mb-2 my-right">
+
+        <label for="input_mac" class="sr-only">Mac address</label>
+        <input type="text" class="form-control" id="input_mac" name="input_mac" placeholder="Введіть Mac">
+      </div>
+
+      <button type="submit" name="button_ip" class="btn btn-primary mb-2" value="get_ip">Get IP</button>
+    </form>
+            <div id="resultDiv">
+    {% if ip %}
+        {{ ip }}</p>
+    {% endif %}
+        </div>
+        </div>
+    </div>
+
+{% endblock connect %}
+
+{% block content %}
+    <table class="table table-sm mx-3" style="width:25%">
+        <thead>
+            <tr>
+                <th>Сервер</th>
+                <th>IP</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for server in data %}
+            <tr>
+                {% include "top_data.html" %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <table class="table table-sm mx-3" style="width:65%">
+        <thead>
+            <tr>
+                {% include 'top_rdata.html' %}
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for server in r_data %}
+            <tr>
+                <td>{{ server.ip }}</td>
+                <td>{{ server.phone }}</td>
+                <td>{{ server.printer }}</td>
+                <td>{{ server.scaner }}</td>
+                <td>{{ server.scan_folder }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
